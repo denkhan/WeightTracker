@@ -49,6 +49,10 @@ class WeightViewModel(private val repo: Repository, private val coroutineContext
         return b
     }
 
+//    fun deleteWeight(weight: Weight){
+//
+//    }
+
     fun updateWeight(weight: Double){
         val current = Date().toSimpleString()
         val temp = Weight(weight, current)
@@ -61,6 +65,7 @@ class WeightViewModel(private val repo: Repository, private val coroutineContext
 
     fun createGraph(list: List<Weight>): LineGraphSeries<DataPoint> {
         val temp = list
+            ?.sortedBy { it.date }
             ?.groupBy { it.date } // (date -> List(exerciseOne, exerciseTwo...), date2 -> List())
             ?.values
             ?.map { weightListByDate -> weightListByDate.map { it.weight }.average() }

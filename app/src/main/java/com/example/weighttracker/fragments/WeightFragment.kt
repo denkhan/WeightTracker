@@ -60,13 +60,16 @@ class WeightFragment : Fragment() {
 
     private fun setUpRecyclerView(weights: List<Weight>) {
         recycler_view_statistic.withModels {
-            weights.reversed().groupBy { it.date }
+            weights.sortedBy { it.date }.reversed().groupBy { it.date }
                 .forEach {
                     epoxyDate {
                         id(it.key)
                         dateText(it.key)
                         val d = it.value.map { it.weight }.average()
                         weightText(d.toString())
+//                        onLongClick { _ ->
+//                            buildDeleteWeightAlertView(it.value.get(0))
+//                            true}
                     }
                 }
         }
@@ -80,6 +83,17 @@ class WeightFragment : Fragment() {
             }
             .show()
     }
+
+//    private fun buildDeleteWeightAlertView(weight: Weight) = context?.let {
+//        AlertDialog.Builder(context!!)
+//            .setTitle("Would you like to remove this weight?\n" +
+//                      weight.date + " " + weight.weight)
+//            .setNegativeButton("Cancel", null)
+//            .setPositiveButton("Yes!") { _, b ->
+//                if (b == AlertDialog.BUTTON_POSITIVE) weightViewModel.deleteWeight(weight)
+//            }
+//            .show()
+//    }
 
     companion object {
         @JvmStatic

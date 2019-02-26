@@ -8,6 +8,7 @@ android:paddingTop="8dp">
 <data>
     <variable name="dateText" type="String" />
     <variable name="weightText" type="String" />
+    <variable name="onLongClick" type="android.view.View.OnLongClickListener" />
 </data>
 <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
